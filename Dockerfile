@@ -26,7 +26,7 @@ RUN apt-get update \
  && echo "$SSH_PASSWD" | chpasswd 
 
 COPY sshd_config /etc/ssh/
-COPY init.sh /usr/local/bin/
+##COPY init.sh /usr/local/bin/
 
 EXPOSE 8000 2222
 
