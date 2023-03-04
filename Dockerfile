@@ -17,12 +17,18 @@ RUN pip install poetry
 RUN poetry config virtualenvs.create false
 RUN poetry update
 
+# ssh
 ENV SSH_PASSWD "root:Docker!"
 RUN apt-get update \
         && apt-get install -y --no-install-recommends dialog \
         && apt-get update \
-  && apt-get install -y --no-install-recommends openssh-server \
-  && echo "$SSH_PASSWD" | chpasswd 
+ && apt-get install -y --no-install-recommends openssh-server \
+ && echo "$SSH_PASSWD" | chpasswd 
+
+COPY sshd_config /etc/ssh/
+COPY init.sh /usr/local/bin/
+
+EXPOSE 8000 2222
 
 
 RUN chmod 744 ./startup.sh
