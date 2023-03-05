@@ -34,9 +34,9 @@ SECRET_KEY: str | None = os.getenv('SECRET_KEY')
 DEBUG: bool = os.getenv('DEBUG', 'False') == 'True'
 
 ##ALLOWED_HOSTS = ['*']
-##ALLOWED_HOSTS: list[str] = os.getenv(
-##    'ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
-ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else (os.getenv('ALLOWED_HOSTS').split(','))
+ALLOWED_HOSTS: list[str] = os.getenv(
+    'ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+##ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else (os.getenv('ALLOWED_HOSTS').split(','))
 
 # Application definition
 
@@ -155,4 +155,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/'
 
-CSRF_TRUSTED_ORIGINS = ['https://'+ os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else ['https://192.168.10.64']
+CSRF_TRUSTED_ORIGINS = ['https://test-docker123458.azurewebsites.net']
