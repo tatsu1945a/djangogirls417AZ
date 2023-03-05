@@ -38,7 +38,6 @@ DEBUG: bool = os.getenv('DEBUG', 'False') == 'True'
 ##    'ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else (os.getenv('ALLOWED_HOSTS').split(','))
 
-
 # Application definition
 
 INSTALLED_APPS = [
