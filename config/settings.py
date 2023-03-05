@@ -34,13 +34,15 @@ SECRET_KEY: str | None = os.getenv('SECRET_KEY')
 DEBUG: bool = os.getenv('DEBUG', 'False') == 'True'
 
 ##ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS: list[str] = os.getenv(
-    'ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+##ALLOWED_HOSTS: list[str] = os.getenv(
+##    'ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else (os.getenv('ALLOWED_HOSTS').split(','))
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    "whitenoise.runserver_nostatic",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -52,6 +54,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -152,3 +155,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/'
+
+CSRF_TRUSTED_ORIGINS = ['https://'+ os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else ['https://192.168.10.64']
